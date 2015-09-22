@@ -14,4 +14,5 @@ print('#### displaying contents ####')
 
 bucket = s3.Bucket('s3-comb-test')
 for object in bucket.objects.all():
-	print(object.key)
+	the_object = s3.Object('s3-comb-test', object.key)
+	print(the_object)
