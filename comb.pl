@@ -4,8 +4,6 @@ use warnings;
 use JSON;
 use Term::ANSIColor;
 
-use Data::Dumper;
-
 sub prompt {
     my ($query) = @_; # take a prompt string as argument
     local $| = 1; # activate autoflush to immediately show the prompt
@@ -19,20 +17,14 @@ sub prompt {
 # Setup AWS CLI
 system("aws configure");
 
-# Get buckets
+# Get user input
 my$target_bucket=prompt"Enter the target bucket (e.g. sysnetsites.com): ";
 my$target_subpath=prompt"Enter the target subpath (e.g. subfolder/deleteme.txt): ";
 
-#my $command = "aws s3 rm --recursive s3://$target_bucket/ --exclude \"*\" --include \"/*/$target_subpath\"";
-#print $command;
-
-# delete all matching files from the target bucket.
-# system("aws s3 rm --recursive s3://$target_bucket/ --exclude \"*\" --include \"/*/$target_subpath\"");
-
 my $objects = `aws s3api list-objects --bucket \"$target_bucket\"`;
 $objects = JSON->new->utf8->decode($objects)->{'Contents'};
-#print Dumper($objects);
 
+# Count the top level folders
 my %top_folders;
 foreach my $check_object (@$objects)
 {
@@ -46,7 +38,7 @@ foreach my $check_object (@$objects)
 		if (exists($top_folders{$splitted[0]}))
 		{
 
-			#top folder already seen
+			# top folder already seen, do nothing
 
 		}
 		else
@@ -83,13 +75,16 @@ if ($proceed_choice eq "delete")
 			my $parent_folder = $splitted[0];
 			my $sub_path = $splitted[1];
 
-			#the object is in a folder, see if the first level path is equal to what we want
+			#the object is in a folder, see if the relative path is equal to what we want
 			if ($splitted[1] eq $target_subpath)
 			{
 
 				if ($actual_deletions == 0)
 				{
+
+					# linebreak before announcing the first deletion, for style.
 					print "\n";
+					
 				}
 
 				print color("yellow"), "deleting \"" . $sub_path . "\" inside of \"" . $parent_folder . "\"\n", color("reset");
