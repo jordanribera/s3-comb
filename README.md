@@ -23,8 +23,9 @@ This repository includes a premade folder/file structure for testing. In order t
    * Enter default region name
    * Enter output format (json)
 3. Enter the name of the target S3 bucket
-4. Enter the target relative path (e.g. `subfolder/deletethis.txt`)
+4. Enter the target relative path (e.g. `subfolder/deleteme.txt`)
 5. Review the warning about the requested operation, and type `delete` to proceed.
+6. Check the test structure in your S3 bucket. Only the specific files matching the relative path should be deleted.
 
 The output should look like this:
 ```
@@ -38,16 +39,16 @@ Enter the target subpath (e.g. subfolder/deleteme.txt): subfolder/preserveme.txt
 proceeding will delete "subfolder/preserveme.txt" in 11 folders. 
 type "delete" to proceed: delete
 
-deleting "subfolder/preserveme.txt" inside of "d01"
-deleting "subfolder/preserveme.txt" inside of "d02"
-deleting "subfolder/preserveme.txt" inside of "d03"
-deleting "subfolder/preserveme.txt" inside of "d04"
-deleting "subfolder/preserveme.txt" inside of "d05"
-deleting "subfolder/preserveme.txt" inside of "d06"
-deleting "subfolder/preserveme.txt" inside of "d07"
-deleting "subfolder/preserveme.txt" inside of "d08"
-deleting "subfolder/preserveme.txt" inside of "d09"
-deleting "subfolder/preserveme.txt" inside of "d10"
+deleting "subfolder/deleteme.txt" inside of "d01"
+deleting "subfolder/deleteme.txt" inside of "d02"
+deleting "subfolder/deleteme.txt" inside of "d03"
+deleting "subfolder/deleteme.txt" inside of "d04"
+deleting "subfolder/deleteme.txt" inside of "d05"
+deleting "subfolder/deleteme.txt" inside of "d06"
+deleting "subfolder/deleteme.txt" inside of "d07"
+deleting "subfolder/deleteme.txt" inside of "d08"
+deleting "subfolder/deleteme.txt" inside of "d09"
+deleting "subfolder/deleteme.txt" inside of "d10"
 
 deletion completed. deleted 10 files.
 ```
