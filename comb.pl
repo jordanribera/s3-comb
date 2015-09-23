@@ -18,6 +18,7 @@ sub prompt {
 system("aws configure");
 
 # Get user input
+print "\n";
 my$target_bucket=prompt"Enter the target bucket (e.g. sysnetsites.com): ";
 my$target_subpath=prompt"Enter the target subpath (e.g. subfolder/deleteme.txt): ";
 
@@ -84,7 +85,7 @@ if ($proceed_choice eq "delete")
 
 					# linebreak before announcing the first deletion, for style.
 					print "\n";
-					
+
 				}
 
 				print color("yellow"), "deleting \"" . $sub_path . "\" inside of \"" . $parent_folder . "\"\n", color("reset");
