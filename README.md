@@ -29,14 +29,14 @@ This repository includes a premade folder/file structure for testing. In order t
 
 The output should look like this:
 ```
-AWS Access Key ID [****************BQJA]: 
-AWS Secret Access Key [****************2+q6]: 
+AWS Access Key ID [********************]: 
+AWS Secret Access Key [********************]: 
 Default region name [us-west-2]: 
 Default output format [json]: 
-Enter the target bucket (e.g. sysnetsites.com): s3-comb-test
-Enter the target subpath (e.g. subfolder/deleteme.txt): subfolder/preserveme.txt
+Enter the target bucket (e.g. sysnetsites.com): your-bucket-name
+Enter the target subpath (e.g. subfolder/deleteme.txt): subfolder/deleteme.txt
 
-proceeding will delete "subfolder/preserveme.txt" in 11 folders. 
+proceeding will delete "subfolder/deleteme.txt" in 11 folders. 
 type "delete" to proceed: delete
 
 deleting "subfolder/deleteme.txt" inside of "d01"
