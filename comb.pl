@@ -2,6 +2,7 @@
 use strict;
 use warnings;
 use JSON;
+use Term::ANSIColor;
 
 use Data::Dumper;
 
@@ -61,7 +62,8 @@ foreach my $check_object (@$objects)
 
 my @top_folders_set = keys %top_folders;
 
-print "proceeding will delete \"" . $target_subpath . "\" in " . @top_folders_set . " folders. \n";
+print "\n";
+print color("red"), "proceeding will delete \"" . $target_subpath . "\" in " . @top_folders_set . " folders. \n", color("reset");
 my $proceed_choice = prompt "type \"delete\" to proceed: ";
 
 if ($proceed_choice eq "delete")
@@ -85,7 +87,12 @@ if ($proceed_choice eq "delete")
 			if ($splitted[1] eq $target_subpath)
 			{
 
-				print "deleting \"" . $sub_path . "\" inside of \"" . $parent_folder . "\"\n";
+				if ($actual_deletions == 0)
+				{
+					print "\n";
+				}
+
+				print color("yellow"), "deleting \"" . $sub_path . "\" inside of \"" . $parent_folder . "\"\n", color("reset");
 				system("aws s3api delete-object --bucket \"$target_bucket\" --key \"$fullkey\"");
 				$actual_deletions++;
 
@@ -95,12 +102,14 @@ if ($proceed_choice eq "delete")
 
 	}
 
+	print "\n";
 	print "deletion completed. deleted " . $actual_deletions . " files. \n";
 
 }
 else
 {
 
+	print "\n";
 	print "deletion aborted. \n";
 
 }
